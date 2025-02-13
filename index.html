@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+            background-color: #FECBD0;
+            overflow: hidden;
+        }
+
+        #noButton {
+            position: absolute;
+            margin-left: 150px;
+            transition: 0.5s;
+        }
+
+        #yesButton {
+            position: absolute;
+            margin-right: 150px;
+        }
+
+        .header_text {
+            font-family: 'Nunito';
+            font-size: 40px;
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 0;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+
+        .btn {
+            background-color: #ffffff;
+            color: rgb(233, 48, 48);
+            padding: 15px 32px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border: none;
+            border-radius: 12px;
+            transition: background-color 0.3s ease;
+        }
+
+        .gif_container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 24px;
+            animation: float 3s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-150px) scale(1.2);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-300px) scale(1);
+                opacity: 0;
+            }
+        }
+    </style>
+</head> 
+
+<body>
+    <div class="container">
+        <div>
+            <h1 class="header_text">would you be my valentine ?</h1>
+            <h1 class="header_text">Are you free tomorrow?</h1>
+        </div>
+        <div class="gif_container">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute animated illustration">
+        </div>
+        <div class="buttons">
+            <button class="btn" id="yesButton" onclick="nextPage()">yay</button>
+            <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">No</button>
+        </div>
+    </div>
+
+    <!-- Floating Hearts Container -->
+    <div id="heartsContainer"></div>
+
+    <script>
+        function nextPage() {
+            window.location.href = "yay.html";
+        }
+
+        function moveButton() {
+            var x = Math.random() * (window.innerWidth - document.getElementById('noButton').offsetWidth) - 85;
+            var y = Math.random() * (window.innerHeight - document.getElementById('noButton').offsetHeight) - 48;
+            document.getElementById('noButton').style.left = `${x}px`;
+            document.getElementById('noButton').style.top = `${y}px`;
+        }
+
+        // Function to create floating hearts
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.classList.add("heart");
+
+            const size = Math.random() * 20 + 10 + "px";
+            heart.style.fontSize = size;
+
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.top = "100vh";
+
+            document.getElementById("heartsContainer").appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+
+        // Generate hearts every 500ms
+        setInterval(createHeart, 500);
+    </script>
+</body> 
+</html>
